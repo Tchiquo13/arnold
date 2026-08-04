@@ -472,21 +472,29 @@ p{margin:0; text-wrap:pretty}
   *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
   .js .rev{opacity:1; transform:none}
 }
+
+/* slogan de marque, en tete du hero */
+.slogan{margin:0 0 22px; padding-left:14px; border-left:2px solid var(--teal)}
+.slogan b{display:block; font-family:var(--display); font-weight:800; font-size:1.24rem;
+  line-height:1.2; letter-spacing:-.012em; color:var(--t1)}
+.slogan span{display:block; margin-top:5px; font-weight:600; font-size:.78rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal)}
+@media (max-width:720px){ .slogan b{font-size:1.12rem} .slogan span{font-size:.72rem} }
 </style>
 <script>document.documentElement.classList.add("js");if(!document.querySelector("meta[name=viewport]")){var m=document.createElement("meta");m.name="viewport";m.content="width=device-width, initial-scale=1";document.head.appendChild(m)}</script>
-<meta name="description" content="Recopier tes programmes, calculer les charges, planifier les seances, preparer ton point du dimanche : Arnold prend tout ca. Les programmes, eux, restent les tiens.">
+<meta name="description" content="Recopier tes programmes, calculer les charges, planifier les séances, préparer ton point du dimanche : Arnold prend tout ça. Les programmes, eux, restent les tiens.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Arnold">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Arnold — pour les coachs">
-<meta property="og:description" content="Recopier tes programmes, calculer les charges, planifier les seances, preparer ton point du dimanche : Arnold prend tout ca. Les programmes, eux, restent les tiens.">
+<meta property="og:description" content="Recopier tes programmes, calculer les charges, planifier les séances, préparer ton point du dimanche : Arnold prend tout ça. Les programmes, eux, restent les tiens.">
 <meta property="og:url" content="https://arnoldapp.fr/coach/">
 <meta property="og:image" content="https://arnoldapp.fr/og-coach.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Arnold — pour les coachs">
-<meta name="twitter:description" content="Recopier tes programmes, calculer les charges, planifier les seances, preparer ton point du dimanche : Arnold prend tout ca. Les programmes, eux, restent les tiens.">
+<meta name="twitter:description" content="Recopier tes programmes, calculer les charges, planifier les séances, préparer ton point du dimanche : Arnold prend tout ça. Les programmes, eux, restent les tiens.">
 <meta name="twitter:image" content="https://arnoldapp.fr/og-coach.png">
 <meta name="theme-color" content="#070B11">
 <link rel="canonical" href="https://arnoldapp.fr/coach/">
@@ -518,7 +526,7 @@ p{margin:0; text-wrap:pretty}
     <div class="wrap hero__grid">
 
       <div>
-        <p class="eyebrow rev in">Coaching sportif · distanciel &amp;/ou présentiel</p>
+        <p class="slogan rev in"><b>Le bras droit qui te manquait.</b><span>L'app des coachs sportifs indépendants</span></p>
         <h1 class="rev in d1">Récupère tes soirées.<br><span class="b">Garde tes élèves.</span></h1>
         <p class="lede rev in d2">
           Recopier tes programmes, calculer les charges, planifier les séances, regarder les vidéos avant toi,
