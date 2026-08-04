@@ -279,6 +279,21 @@ p{margin:0; text-wrap:pretty}
   .js .rev{opacity:1; transform:none}
   .rbar i.go{transform:scaleX(0)}
 }
+
+/* avant / apres : silhouettes dessinees (illustration, pas une photo) */
+.ba{flex:1; min-height:78px; border-radius:10px; position:relative; overflow:hidden;
+  border:1px solid var(--line); background:linear-gradient(90deg,#19243C 50%,#27384F 50%)}
+.ba__fig{position:absolute; inset:0; display:grid; place-items:center}
+.ba__fig svg{height:91%; width:auto}
+.ba__fig--a{clip-path:inset(0 50% 0 0)}
+.ba__fig--b{clip-path:inset(0 0 0 50%)}
+.ba__split{position:absolute; left:50%; top:0; bottom:0; width:2px;
+  background:var(--teal); box-shadow:0 0 10px var(--teal-glow)}
+.ba__grip{position:absolute; left:50%; top:70%; transform:translate(-50%,-50%);
+  width:20px; height:20px; border-radius:50%; background:var(--teal); border:2px solid #04120F}
+.ba__t{position:absolute; top:6px; font-size:.55rem; font-weight:700}
+.ba__t--l{left:7px; color:var(--t2)}
+.ba__t--r{right:7px; color:var(--teal)}
 </style>
 <script>document.documentElement.classList.add("js");if(!document.querySelector("meta[name=viewport]")){var m=document.createElement("meta");m.name="viewport";m.content="width=device-width, initial-scale=1";document.head.appendChild(m)}</script>
 <meta name="description" content="Ta seance, tes charges, tes progres et ton coach, au meme endroit. Plus jamais seul a la salle.">
@@ -403,7 +418,7 @@ p{margin:0; text-wrap:pretty}
             <li><span class="tick">✓</span><span><b>Tu vois le mouvement en vidéo.</b> Pas besoin d'aller chercher sur internet.</span></li>
             <li><span class="tick">✓</span><span><b>Machine prise ? Tu remplaces l'exercice.</b> L'app te propose l'équivalent, ton programme n'est pas cassé.</span></li>
             <li><span class="tick">✓</span><span><b>Ça marche sans réseau.</b> Sous-sol, salle blindée : tout est gardé et se met à jour en sortant.</span></li>
-            <li><span class="tick">✓</span><span><b>À la fin, l'app te dit combien mettre la prochaine fois.</b></span></li>
+            <li><span class="tick">✓</span><span><b>À la fin, on te dit combien mettre la prochaine fois.</b></span></li>
           </ul>
         </div>
         <div class="bl__media">
@@ -482,7 +497,7 @@ p{margin:0; text-wrap:pretty}
             <li><span class="tick">✓</span><span><b>« Je sais pas quoi cuisiner » : réglé.</b> Depuis n'importe quel repas, tu demandes des recettes faites avec exactement les aliments prévus.</span></li>
             <li><span class="tick">✓</span><span><b>Tes allergies et ton régime sont respectés.</b> Halal, végétarien, sans gluten, intolérances : tu les déclares une fois, c'est pris en compte partout.</span></li>
             <li><span class="tick">✓</span><span><b>Tu dis ce que tu détestes.</b> Ça ne reviendra pas dans ton plan.</span></li>
-            <li><span class="tick">✓</span><span><b>Scanne un produit, l'app le reconnaît.</b> Et tes verres d'eau se comptent en un tap.</span></li>
+            <li><span class="tick">✓</span><span><b>Scanne un produit, l'app le reconnaît.</b> Et ton hydratation se suit en un tap.</span></li>
           </ul>
         </div>
         <div class="bl__media">
@@ -528,12 +543,7 @@ p{margin:0; text-wrap:pretty}
             </div>
             <div class="mc" style="flex:1;display:flex;flex-direction:column;padding:10px">
               <div class="mc__t" style="margin-bottom:7px">Avant / après</div>
-              <div style="flex:1;min-height:78px;border-radius:10px;position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(120deg,#1B2740 50%,#25344F 50%)">
-                <span style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--teal);box-shadow:0 0 10px var(--teal-glow)"></span>
-                <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--teal);border:2px solid #04120F"></span>
-                <span style="position:absolute;left:7px;top:6px;font-size:.55rem;font-weight:700;color:var(--t2)">1ᵉʳ MAI</span>
-                <span style="position:absolute;right:7px;top:6px;font-size:.55rem;font-weight:700;color:var(--teal)">AUJOURD'HUI</span>
-              </div>
+              <div class="ba"><div class="ba__fig ba__fig--a" aria-hidden="true"><svg viewBox="0 0 140 260" fill="none"><g fill="rgba(238,242,248,.58)" stroke="rgba(238,242,248,.58)" stroke-linecap="round" stroke-linejoin="round"><circle cx="70" cy="25" r="12" stroke="none"/><path d="M65 33 L75 33 L75 46 L65 46 Z" stroke="none"/><path d="M64 43 Q54 45 52 55 C54 72 55 88 55 100 C55 112 56 124 57 134 L83 134 C84 124 85 112 85 100 C85 88 86 72 88 55 Q86 45 76 43 Z" stroke="none"/><path d="M54 57 L50 135" stroke-width="7.5"/><path d="M86 57 L90 135" stroke-width="7.5"/><path d="M63 126 L61 244" stroke-width="11"/><path d="M77 126 L79 244" stroke-width="11"/></g></svg></div><div class="ba__fig ba__fig--b" aria-hidden="true"><svg viewBox="0 0 140 260" fill="none"><g fill="rgba(238,242,248,.93)" stroke="rgba(238,242,248,.93)" stroke-linecap="round" stroke-linejoin="round"><circle cx="70" cy="25" r="12" stroke="none"/><path d="M62 33 L78 33 L78 45 L62 45 Z" stroke="none"/><path d="M62 42 Q46 44 40 58 C46 78 51 96 54 110 C55 120 55 128 56 134 L84 134 C85 128 85 120 86 110 C89 96 94 78 100 58 Q94 44 78 42 Z" stroke="none"/><path d="M45 63 L41 134" stroke-width="15"/><path d="M95 63 L99 134" stroke-width="15"/><path d="M62 125 L59 244" stroke-width="17"/><path d="M78 125 L81 244" stroke-width="17"/></g></svg></div><span class="ba__split"></span><span class="ba__grip"></span><span class="ba__t ba__t--l">1ᵉʳ MAI</span><span class="ba__t ba__t--r">AUJOURD'HUI</span></div>
             </div>
             <div class="mc" style="border-color:rgba(170,255,42,.3);background:rgba(170,255,42,.06)"><div class="mc__r"><span class="sq" style="background:rgba(170,255,42,.16)">🏆</span><div><div class="mc__t" style="color:var(--lime)">Record · Squat 100 kg</div><div class="mc__s">Il y a 3 jours · ❤️ de ton coach</div></div></div></div>
             <div class="scr__nav"><i></i><i></i><i></i><i></i><i class="on"></i></div>
