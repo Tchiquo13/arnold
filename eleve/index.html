@@ -133,6 +133,22 @@ p{margin:0; text-wrap:pretty}
 .ce__t em{font-style:normal; color:var(--teal)}
 .ce__s{margin-top:9px; font-size:.87rem; color:var(--t2); line-height:1.4}
 
+/* rubriques (onglets) */
+.ftabs{display:none; margin:22px auto 34px; padding:5px; max-width:640px; border-radius:var(--r-full);
+  background:rgba(255,255,255,.035); border:1px solid var(--line); gap:4px;
+  overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none}
+.js .ftabs{display:flex}
+.ftabs::-webkit-scrollbar{display:none}
+.ftab{flex:1 0 auto; appearance:none; background:none; border:1px solid transparent; border-radius:var(--r-full);
+  padding:10px 16px; font-family:var(--body); font-weight:700; font-size:.9rem; color:var(--t2);
+  cursor:pointer; white-space:nowrap; transition:color .2s, background .2s, border-color .2s}
+.ftab:hover{color:var(--t1)}
+.ftab.is-on{background:var(--teal-dim); border-color:var(--teal-glow); color:var(--teal)}
+.tabs-ready .bl{display:none}
+.tabs-ready .bl.is-cur{display:grid; animation:tabin .45s cubic-bezier(.16,1,.3,1)}
+.tabs-ready .bl+.bl{margin-top:0}
+@keyframes tabin{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
 /* blocks */
 .bl{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:clamp(36px,5.5vw,76px); align-items:center}
 .bl+.bl{margin-top:clamp(72px,9vw,120px)}
@@ -169,39 +185,37 @@ p{margin:0; text-wrap:pretty}
 .bar i{display:block; height:100%; border-radius:var(--r-full); background:var(--teal)}
 .sq{width:26px; height:26px; border-radius:8px; display:grid; place-items:center; font-size:.68rem; flex:none}
 .mrow{display:flex; gap:6px}
-/* ── figure animée : le squat en boucle ────────── */
+/* ── cadre vidéo : squat filmé + squelette d'analyse IA ────────── */
 .exo{
-  flex:1; min-height:96px; position:relative; overflow:hidden; border-radius:10px;
-  border:1px solid var(--line); display:grid; place-items:center; padding:6px 4px 18px;
+  flex:1; min-height:150px; position:relative; overflow:hidden; border-radius:10px;
+  border:1px solid var(--line); display:grid; place-items:center; padding:10px 4px 20px;
   background:radial-gradient(125% 95% at 50% 12%, #24334F 0%, #0C1422 72%)
 }
 .exo::after{
   content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
   background:radial-gradient(118% 88% at 50% 44%, transparent 62%, rgba(0,0,0,.32))
 }
-.exo svg{height:100%; width:auto; max-width:100%; aspect-ratio:100/166; overflow:hidden}
-.exo line,.exo circle{fill:none; stroke:rgba(238,242,248,.92); stroke-width:5; stroke-linecap:round}
-.exo__ground{stroke:rgba(255,255,255,.16) !important; stroke-width:2 !important}
-.exo__bar line{stroke:var(--teal) !important; stroke-width:4 !important}
-.exo__bar rect{fill:var(--teal); stroke:none}
-.exo__body,.exo__thigh,.exo__shin,.exo__torso{transform-box:view-box}
-.exo__body {transform-origin:50px 84px;  animation:exoBody  2.7s cubic-bezier(.45,0,.55,1) infinite}
-.exo__thigh{transform-origin:50px 84px;  animation:exoThigh 2.7s cubic-bezier(.45,0,.55,1) infinite}
-.exo__shin {transform-origin:50px 116px; animation:exoShin  2.7s cubic-bezier(.45,0,.55,1) infinite}
-.exo__torso{transform-origin:50px 84px;  animation:exoTorso 2.7s cubic-bezier(.45,0,.55,1) infinite}
-@keyframes exoBody {0%,100%{transform:translateY(.6px)} 50%{transform:translateY(22.8px)}}
-@keyframes exoThigh{0%,100%{transform:rotate(-8deg)}    50%{transform:rotate(-50deg)}}
-@keyframes exoShin {0%,100%{transform:rotate(16deg)}    50%{transform:rotate(100deg)}}
-@keyframes exoTorso{0%,100%{transform:rotate(5deg)}     50%{transform:rotate(26deg)}}
+.exo svg{height:100%; width:auto; max-width:100%; aspect-ratio:150/170; overflow:hidden}
+.exo__chip{position:absolute; top:7px; left:7px; z-index:2; display:inline-flex; align-items:center; gap:5px; padding:3px 8px; border-radius:var(--r-full);
+  background:rgba(7,11,17,.66); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(4px);
+  color:rgba(255,255,255,.85); font-size:.5rem; font-weight:700; letter-spacing:.07em}
+.exo__chip i{width:5px; height:5px; border-radius:50%; background:var(--err); animation:recblink 1.6s ease-in-out infinite}
+@keyframes recblink{0%,100%{opacity:1} 50%{opacity:.25}}
+.exo__note{position:absolute; top:7px; right:7px; z-index:2; padding:3px 9px; border-radius:var(--r-full);
+  background:rgba(7,11,17,.72); border:1.5px solid #4ADE80; backdrop-filter:blur(4px);
+  color:#4ADE80; font-family:var(--disp); font-weight:800; font-size:.62rem}
+.exo__scan{position:absolute; left:0; right:0; top:0; height:32px; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, transparent, rgba(0,229,196,.14) 52%, rgba(0,229,196,.28) 58%, transparent 64%);
+  animation:exoScan 3.4s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes exoScan{0%{transform:translateY(-36px)} 60%{transform:translateY(250px)} 100%{transform:translateY(250px)}}
 .exo__hud{position:absolute; left:8px; right:8px; bottom:7px; z-index:2; display:flex; align-items:center; gap:7px}
 .exo__t{font-size:.55rem; font-weight:700; color:rgba(255,255,255,.72); font-variant-numeric:tabular-nums}
 .exo__track{flex:1; height:3px; border-radius:2px; background:rgba(255,255,255,.18); overflow:hidden}
 .exo__track i{
   display:block; height:100%; width:100%; border-radius:2px; background:var(--teal);
-  transform-origin:left; animation:exoScrub 2.7s linear infinite
+  transform-origin:left; animation:exoScrub 5.2s linear infinite
 }
 @keyframes exoScrub{0%{transform:scaleX(0)} 100%{transform:scaleX(1)}}
-.exo__badge{position:absolute; top:8px; right:8px; z-index:2; width:34px; height:34px; border-radius:50%; background:rgba(7,11,17,.74); border:1.5px solid #4ADE80; display:grid; place-items:center; backdrop-filter:blur(4px); font-family:var(--disp); font-weight:800; font-size:.8rem; color:#4ADE80}
 .scr__nav{margin-top:auto; display:flex; justify-content:space-around; padding:9px 6px 4px; border-top:1px solid var(--line)}
 .scr__nav i{width:17px; height:3px; border-radius:2px; background:rgba(255,255,255,.13); display:block}
 .scr__nav i.on{background:var(--teal); box-shadow:0 0 10px var(--teal-glow)}
@@ -273,7 +287,27 @@ p{margin:0; text-wrap:pretty}
   body{font-size:17px}
   .brand__for{display:none}
   .nav__in{height:60px}
+  .sec{padding-block:52px}
+  .sec--tight{padding-block:40px}
+  .ce{padding-block:18px}
+  .ftabs{padding:4px; gap:2px}
+  .ftab{padding:9px 12px; font-size:.82rem}
+  .ftab__e{display:none}
+  .bl__list li{font-size:.94rem}
+  /* cartes coach : carrousel à balayage */
+  .coach__g{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:10px;
+    margin-inline:-6px; padding:2px 6px 10px; scrollbar-width:none}
+  .coach__g::-webkit-scrollbar{display:none}
+  .coach__i{flex:0 0 78%; scroll-snap-align:center}
+  .coach__hint{display:block}
+  /* motivation : grille compacte 2 x 2 */
+  .mot{grid-template-columns:repeat(2,1fr); gap:10px}
+  .mo{padding:15px}
+  .mo__i{width:28px; height:28px; font-size:.85rem; margin-bottom:10px; border-radius:8px}
+  .mo h4{font-size:.94rem}
+  .mo p{font-size:.79rem; line-height:1.4}
 }
+.coach__hint{display:none; margin-top:4px; font-size:.75rem; color:var(--t3); font-weight:600}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
   .js .rev{opacity:1; transform:none}
@@ -344,7 +378,7 @@ p{margin:0; text-wrap:pretty}
         <h1 class="rev in d1">Plus jamais<br>seul à la salle.</h1>
         <p class="lede rev in d2">
           Ton programme, tes charges, ce que tu manges, tes progrès.
-          Et ton coach qui voit tout ce que tu fais — même quand il n'est pas à côté de toi.
+          Et ton coach qui voit tout ce que tu fais — même quand il n'est pas là.
         </p>
         <div class="hero__cta rev in d3">
           <a class="btn btn--primary" href="#fin">Commencer</a>
@@ -397,25 +431,32 @@ p{margin:0; text-wrap:pretty}
   <!-- THREE CERTAINTIES -->
   <section class="cert">
     <div class="wrap cert__in">
-      <div class="ce rev"><p class="ce__t">Tu sais <em>quoi faire</em>.</p><p class="ce__s">Ta séance du jour t'attend en grand dès que tu ouvres l'app.</p></div>
-      <div class="ce rev d1"><p class="ce__t">Tu sais si <em>c'est bien fait</em>.</p><p class="ce__s">Tu filmes dix secondes, ton coach te dit si le mouvement est bon.</p></div>
+      <div class="ce rev"><p class="ce__t">Tu sais <em>quoi faire</em>.</p><p class="ce__s">Ta séance du jour t'attend dès que tu ouvres l'app.</p></div>
+      <div class="ce rev d1"><p class="ce__t">Tu sais si <em>c'est bien fait</em>.</p><p class="ce__s">Tu filmes dix secondes, l'IA te note, ton coach valide.</p></div>
       <div class="ce rev d2"><p class="ce__t">Tu vois que <em>ça marche</em>.</p><p class="ce__s">Tes courbes, tes records, tes photos avant / après.</p></div>
     </div>
   </section>
 
-  <!-- BLOCKS -->
+  <!-- RUBRIQUES -->
   <section class="sec" id="quoi">
-    <div class="wrap">
+    <div class="wrap" id="rubs">
+
+      <p class="eyebrow" style="text-align:center; margin-bottom:6px">Ce qu'il y a dedans</p>
+      <div class="ftabs" id="ftabs" role="tablist" aria-label="Les rubriques de l'app">
+        <button class="ftab is-on" id="tab-seance" role="tab" aria-controls="rub-seance" aria-selected="true"><span class="ftab__e">🏋️ </span>Séance</button>
+        <button class="ftab" id="tab-technique" role="tab" aria-controls="rub-technique" aria-selected="false"><span class="ftab__e">🎥 </span>Technique</button>
+        <button class="ftab" id="tab-nutrition" role="tab" aria-controls="rub-nutrition" aria-selected="false"><span class="ftab__e">🍽 </span>Nutrition</button>
+        <button class="ftab" id="tab-progres" role="tab" aria-controls="rub-progres" aria-selected="false"><span class="ftab__e">📈 </span>Progrès</button>
+      </div>
 
       <!-- 1 -->
-      <article class="bl rev">
+      <article class="bl" id="rub-seance" role="tabpanel" aria-labelledby="tab-seance">
         <div>
           <p class="bl__k"><i></i>Ta séance</p>
           <h3>Tu ouvres l'app.<br>Tu sais quoi faire.</h3>
-          <p class="bl__d">Ta séance du jour est là, en grand, avec un bouton pour démarrer. Ensuite l'app te guide : exercice par exercice, série par série. Tu n'as plus rien à retenir.</p>
+          <p class="bl__d">Ta séance du jour est là, avec un bouton pour démarrer. Ensuite l'app te guide : exercice par exercice, série par série. Tu n'as plus rien à retenir.</p>
           <ul class="bl__list">
             <li><span class="tick">✓</span><span><b>Le chrono de repos démarre tout seul.</b> Il te prévient même si tu as éteint ton écran.</span></li>
-            <li><span class="tick">✓</span><span><b>Tu vois le mouvement en vidéo.</b> Pas besoin d'aller chercher sur internet.</span></li>
             <li><span class="tick">✓</span><span><b>Machine prise ? Tu remplaces l'exercice.</b> L'app te propose l'équivalent, ton programme n'est pas cassé.</span></li>
             <li><span class="tick">✓</span><span><b>Ça marche sans réseau.</b> Sous-sol, salle blindée : tout est gardé et se met à jour en sortant.</span></li>
             <li><span class="tick">✓</span><span><b>À la fin, on te dit combien mettre la prochaine fois.</b></span></li>
@@ -435,11 +476,11 @@ p{margin:0; text-wrap:pretty}
       </article>
 
       <!-- 2 -->
-      <article class="bl rev">
+      <article class="bl" id="rub-technique" role="tabpanel" aria-labelledby="tab-technique">
         <div>
           <p class="bl__k"><i></i>Ta technique</p>
-          <h3>Tu sais si ton<br>mouvement est bon.</h3>
-          <p class="bl__d">Tu filmes dix secondes de ton exercice. Tu reçois une note sur 100, trois choses que tu fais bien et trois choses à corriger : la profondeur, le dos, les genoux, la vitesse, le gainage, l'équilibre gauche-droite.</p>
+          <h3>Tu filmes. L'IA analyse.<br>Ton coach valide.</h3>
+          <p class="bl__d">Tu filmes dix secondes de ton exercice. L'IA regarde ta vidéo, pose ses repères sur ton corps et te note sur 100 : ce qui est bien, ce qui est à corriger — la profondeur, le dos, les genoux, la vitesse.</p>
           <ul class="bl__list">
             <li><span class="tick">✓</span><span><b>Puis ton coach passe derrière.</b> C'est lui qui valide, ou qui te demande de refilmer. La note ne remplace pas son avis.</span></li>
             <li><span class="tick">✓</span><span><b>Il te répond souvent à la voix.</b> Tu l'écoutes dans l'app, comme un message audio.</span></li>
@@ -450,29 +491,12 @@ p{margin:0; text-wrap:pretty}
           <div class="phone"><div class="scr">
             <div class="scr__bar"><span>19:04</span><span>▂▄▆ ⏻</span></div>
             <div class="scr__ttl">Ton squat</div>
+            <div class="scr__sub">Ta vidéo, analysée par l'IA</div>
             <div class="exo">
-              <svg viewBox="0 0 100 166" aria-label="Silhouette exécutant un squat en boucle" role="img">
-                <g class="exo__body">
-                  <g class="exo__thigh">
-                    <line x1="50" y1="84" x2="50" y2="116"/>
-                    <g class="exo__shin"><line x1="50" y1="116" x2="50" y2="148"/></g>
-                  </g>
-                  <g class="exo__torso">
-                    <line x1="50" y1="84" x2="50" y2="45"/>
-                    <circle cx="50" cy="33" r="9"/>
-                    <line x1="50" y1="48" x2="36" y2="62"/>
-                    <line x1="36" y1="62" x2="30" y2="47"/>
-                    <g class="exo__bar">
-                      <line x1="27" y1="45" x2="73" y2="45"/>
-                      <rect x="24" y="37" width="5" height="16" rx="2.5"/>
-                      <rect x="71" y="37" width="5" height="16" rx="2.5"/>
-                    </g>
-                  </g>
-                </g>
-                <line x1="41" y1="148" x2="61" y2="148"/>
-                <line class="exo__ground" x1="16" y1="153" x2="84" y2="153"/>
-              </svg>
-              <span class="exo__badge">82</span>
+              <span class="exo__scan" aria-hidden="true"></span>
+              <svg viewBox="0 0 150 170" role="img" aria-label="Vidéo d'un squat de profil, squelette d'analyse posé par l'IA"><line x1="12" y1="153" x2="138" y2="153" stroke="rgba(255,255,255,.16)" stroke-width="2" stroke-linecap="round"/><g fill="#EEF2F8" opacity=".3" transform="translate(-6 3)"><path d="M-12 -6C-16.1 -5 -12.7 -3.9 -12.5 0C-12.3 3.9 -11.6 11.9 -11 17.3C-10.4 22.7 -9.6 28.1 -9 32.5C-8.4 36.8 -7.9 40.8 -7.5 43.3C-7.1 45.8 -8.8 46.6 -6.5 47.3C-4.2 48 4.2 48 6.5 47.3C8.8 46.6 7.1 45.8 7.5 43.3C7.9 40.8 8.4 36.8 9 32.5C9.6 28.1 10.4 22.7 11 17.3C11.6 11.9 12.3 3.9 12.5 0C12.7 -3.9 16.1 -5 12 -6C7.9 -7 -7.9 -7 -12 -6Z" transform="translate(46 111) rotate(-96.6)"/><path d="M-7.5 -4C-10 -3.3 -7.7 -3 -7.5 0C-7.3 3 -6.7 8.8 -6.3 13.7C-5.9 18.7 -5.3 24.4 -5 29.7C-4.6 35 -4.4 42.4 -4.2 45.7C-4 49 -5.4 49 -4 49.7C-2.6 50.4 2.6 50.4 4 49.7C5.4 49 3.9 49 4.2 45.7C4.5 42.4 5.2 35 6 29.7C6.9 24.4 9.1 18.7 9.3 13.7C9.6 8.8 7.8 3 7.5 0C7.2 -3 10 -3.3 7.5 -4C5 -4.7 -5 -4.7 -7.5 -4Z" transform="translate(89 106) rotate(23.2)"/><path d="M-4 -3C-5.4 -2.5 -4.3 -2.6 -4.2 0C-4.1 2.6 -3.9 8.4 -3.6 12.6C-3.3 16.7 -2.8 22.7 -2.6 25.1C-2.4 27.6 -3 26.8 -2.2 27.1C-1.4 27.5 1.4 27.5 2.2 27.1C3 26.8 2.4 27.6 2.6 25.1C2.8 22.7 3.3 16.7 3.6 12.6C3.9 8.4 4.1 2.6 4.2 0C4.3 -2.6 5.4 -2.5 4 -3C2.6 -3.5 -2.6 -3.5 -4 -3Z" transform="translate(71 148) rotate(-84.3)"/></g><g fill="#EEF2F8" opacity=".92"><ellipse cx="82" cy="33" rx="10" ry="11"/><path d="M-6 -8C-9.6 -6.7 -10.3 -3.8 -11.5 0C-12.7 3.8 -13.2 9.1 -13 15C-12.8 20.9 -10.2 29.1 -10.5 35.4C-10.7 41.8 -13.2 47.7 -14.5 53.2C-15.7 58.6 -18.2 64.5 -18 68.2C-17.7 71.8 -17.5 74 -13 75.2C-8.5 76.3 5.2 76.3 9 75.2C12.8 74 9.8 71.8 10 68.2C10.3 64.5 10.3 58.6 10.5 53.2C10.8 47.7 11.1 41.8 11.5 35.4C11.9 29.1 13 20.9 13 15C13 9.1 12 3.8 11.5 0C11 -3.8 12.9 -6.7 10 -8C7.1 -9.3 -2.4 -9.3 -6 -8Z" transform="translate(72 48) rotate(22.4)"/><path d="M-7 -5C-9.3 -4.2 -7.2 -3.2 -7 0C-6.8 3.2 -6.3 9.4 -6 14.1C-5.7 18.8 -5.2 25.3 -5 28.2C-4.8 31 -6.2 30.7 -4.6 31.2C-3 31.7 3 31.7 4.6 31.2C6.2 30.7 4.8 31 5 28.2C5.2 25.3 5.7 18.8 6 14.1C6.3 9.4 6.8 3.2 7 0C7.2 -3.2 9.3 -4.2 7 -5C4.7 -5.8 -4.7 -5.8 -7 -5Z" transform="translate(72 48) rotate(-27.5)"/><path d="M-5 -3C-6.7 -2.5 -5.1 -2.7 -5 0C-4.9 2.7 -4.6 8.7 -4.4 13.1C-4.2 17.4 -3.8 23.7 -3.6 26.2C-3.4 28.7 -4.6 27.8 -3.4 28.2C-2.2 28.5 2.2 28.5 3.4 28.2C4.6 27.8 3.4 28.7 3.6 26.2C3.8 23.7 4.2 17.4 4.4 13.1C4.6 8.7 4.9 2.7 5 0C5.1 -2.7 6.7 -2.5 5 -3C3.3 -3.5 -3.3 -3.5 -5 -3Z" transform="translate(85 73) rotate(136.5)"/><path d="M-12 -6C-16.1 -5 -12.7 -3.9 -12.5 0C-12.3 3.9 -11.6 11.9 -11 17.3C-10.4 22.7 -9.6 28.1 -9 32.5C-8.4 36.8 -7.9 40.8 -7.5 43.3C-7.1 45.8 -8.8 46.6 -6.5 47.3C-4.2 48 4.2 48 6.5 47.3C8.8 46.6 7.1 45.8 7.5 43.3C7.9 40.8 8.4 36.8 9 32.5C9.6 28.1 10.4 22.7 11 17.3C11.6 11.9 12.3 3.9 12.5 0C12.7 -3.9 16.1 -5 12 -6C7.9 -7 -7.9 -7 -12 -6Z" transform="translate(46 111) rotate(-96.6)"/><path d="M-7.5 -4C-10 -3.3 -7.7 -3 -7.5 0C-7.3 3 -6.7 8.8 -6.3 13.7C-5.9 18.7 -5.3 24.4 -5 29.7C-4.6 35 -4.4 42.4 -4.2 45.7C-4 49 -5.4 49 -4 49.7C-2.6 50.4 2.6 50.4 4 49.7C5.4 49 3.9 49 4.2 45.7C4.5 42.4 5.2 35 6 29.7C6.9 24.4 9.1 18.7 9.3 13.7C9.6 8.8 7.8 3 7.5 0C7.2 -3 10 -3.3 7.5 -4C5 -4.7 -5 -4.7 -7.5 -4Z" transform="translate(89 106) rotate(23.2)"/><path d="M-4 -3C-5.4 -2.5 -4.3 -2.6 -4.2 0C-4.1 2.6 -3.9 8.4 -3.6 12.6C-3.3 16.7 -2.8 22.7 -2.6 25.1C-2.4 27.6 -3 26.8 -2.2 27.1C-1.4 27.5 1.4 27.5 2.2 27.1C3 26.8 2.4 27.6 2.6 25.1C2.8 22.7 3.3 16.7 3.6 12.6C3.9 8.4 4.1 2.6 4.2 0C4.3 -2.6 5.4 -2.5 4 -3C2.6 -3.5 -2.6 -3.5 -4 -3Z" transform="translate(71 148) rotate(-84.3)"/></g><g><circle cx="57" cy="47" r="16" fill="rgba(10,16,28,.6)" stroke="#00D4B4" stroke-width="2"/><circle cx="57" cy="47" r="9.5" fill="none" stroke="rgba(0,212,180,.3)" stroke-width="1.2"/><circle cx="57" cy="47" r="3.6" fill="#00D4B4"/></g><line x1="26" y1="106" x2="128" y2="106" stroke="rgba(238,242,248,.28)" stroke-width="1.2" stroke-dasharray="4 4"/><g stroke="#00E5C4" stroke-width="1.8" stroke-linecap="round" opacity=".9"><line x1="71" y1="148" x2="89" y2="106"/><line x1="89" y1="106" x2="46" y2="111"/><line x1="46" y1="111" x2="72" y2="48"/><line x1="72" y1="48" x2="82" y2="33"/></g><circle cx="71" cy="148" r="5.5" fill="rgba(0,229,196,.25)"/><circle cx="71" cy="148" r="2.6" fill="#00E5C4"/><circle cx="89" cy="106" r="5.5" fill="rgba(0,229,196,.25)"/><circle cx="89" cy="106" r="2.6" fill="#00E5C4"/><circle cx="72" cy="48" r="5.5" fill="rgba(0,229,196,.25)"/><circle cx="72" cy="48" r="2.6" fill="#00E5C4"/><circle cx="82" cy="33" r="5.5" fill="rgba(0,229,196,.25)"/><circle cx="82" cy="33" r="2.6" fill="#00E5C4"/><circle cx="46" cy="111" r="5.5" fill="rgba(170,255,42,.28)"/><circle cx="46" cy="111" r="2.6" fill="#AAFF2A"/><g font-family="sans-serif" font-size="7" font-weight="700"><rect x="101" y="116" width="21" height="11" rx="5.5" fill="rgba(7,11,17,.72)" stroke="rgba(0,229,196,.5)" stroke-width="1"/><text x="111.5" y="124.2" text-anchor="middle" fill="#00E5C4">92°</text></g></svg>
+              <span class="exo__chip"><i></i>TA VIDÉO</span>
+              <span class="exo__note">✨ 82/100</span>
               <div class="exo__hud">
                 <span class="exo__t">0:04</span>
                 <span class="exo__track"><i></i></span>
@@ -488,15 +512,14 @@ p{margin:0; text-wrap:pretty}
       </article>
 
       <!-- 3 -->
-      <article class="bl rev">
+      <article class="bl" id="rub-nutrition" role="tabpanel" aria-labelledby="tab-nutrition">
         <div>
           <p class="bl__k"><i></i>Ta nutrition</p>
           <h3>Tu sais quoi<br>manger ce soir.</h3>
           <p class="bl__d">Ton coach t'envoie un plan sur sept jours : chaque repas, chaque aliment, chaque quantité. Tu coches au fur et à mesure, tes calories et tes protéines se remplissent toutes seules.</p>
           <ul class="bl__list">
             <li><span class="tick">✓</span><span><b>« Je sais pas quoi cuisiner » : réglé.</b> Depuis n'importe quel repas, tu demandes des recettes faites avec exactement les aliments prévus.</span></li>
-            <li><span class="tick">✓</span><span><b>Tes allergies et ton régime sont respectés.</b> Halal, végétarien, sans gluten, intolérances : tu les déclares une fois, c'est pris en compte partout.</span></li>
-            <li><span class="tick">✓</span><span><b>Tu dis ce que tu détestes.</b> Ça ne reviendra pas dans ton plan.</span></li>
+            <li><span class="tick">✓</span><span><b>Tes allergies, ton régime et tes dégoûts sont respectés.</b> Halal, végétarien, sans gluten, « pas de brocoli » : tu le dis une fois, c'est pris en compte partout.</span></li>
             <li><span class="tick">✓</span><span><b>Scanne un produit, l'app le reconnaît.</b> Et ton hydratation se suit en un tap.</span></li>
           </ul>
         </div>
@@ -521,16 +544,15 @@ p{margin:0; text-wrap:pretty}
       </article>
 
       <!-- 4 -->
-      <article class="bl rev">
+      <article class="bl" id="rub-progres" role="tabpanel" aria-labelledby="tab-progres">
         <div>
           <p class="bl__k"><i></i>Tes progrès</p>
           <h3>Tu vois<br>que ça marche.</h3>
-          <p class="bl__d">C'est le moment où un mois d'efforts devient visible. Tes photos de suivi se prennent en trois taps, et l'app affiche ta photo précédente en transparence dans le viseur pour que tu te remettes exactement dans la même position.</p>
+          <p class="bl__d">Un mois d'efforts devient enfin visible. Tes photos de suivi se prennent en trois taps, et l'app affiche la précédente en transparence dans le viseur pour que tu reprennes la même position.</p>
           <ul class="bl__list">
             <li><span class="tick">✓</span><span><b>Ton avant / après, avec un curseur.</b> Tu fais glisser entre deux photos et tu vois la différence.</span></li>
             <li><span class="tick">✓</span><span><b>Tes records, célébrés.</b> Une pluie de confettis quand tu bats ton ancien poids.</span></li>
             <li><span class="tick">✓</span><span><b>Ton poids, tes mensurations, tes courbes.</b> Et le détail de chaque exercice : « j'ai progressé de combien au développé couché ? »</span></li>
-            <li><span class="tick">✓</span><span><b>Un mot compliqué ? Une pastille ⓘ l'explique.</b> RPE, dégressif, volume : rien n'est laissé dans le flou.</span></li>
           </ul>
         </div>
         <div class="bl__media">
@@ -568,6 +590,7 @@ p{margin:0; text-wrap:pretty}
             <div class="coach__i"><h4>Votre duo est compté</h4><p>Le nombre de séances faites ensemble, depuis quand il te suit, tes records du mois. Votre histoire, en chiffres.</p></div>
             <div class="coach__i"><h4>Tes rendez-vous en salle</h4><p>Tu confirmes ta présence en un tap, tu proposes un autre créneau si tu ne peux pas. Plus de dix SMS pour caler une heure.</p></div>
           </div>
+          <p class="coach__hint">Fais glisser pour tout voir →</p>
         </div>
       </div>
     </div>
@@ -579,7 +602,7 @@ p{margin:0; text-wrap:pretty}
       <p class="eyebrow eyebrow--mute rev">Ce qui fait que tu y retournes</p>
       <h2 class="rev d1">La régularité,<br>rendue satisfaisante.</h2>
       <div class="mot">
-        <div class="mo rev d1"><div class="mo__i" style="background:rgba(255,140,66,.15)">🔥</div><h4>Ta flamme</h4><p>Le nombre de jours d'affilée où tu t'y mets. Elle est célébrée à 3, 7, 14 et 30 jours.</p></div>
+        <div class="mo rev d1"><div class="mo__i" style="background:rgba(255,140,66,.15)">🔥</div><h4>Ta flamme</h4><p>Le nombre de jours d'affilée où tu t'y mets. Célébrée à 3, 7, 14 et 30 jours.</p></div>
         <div class="mo rev d2"><div class="mo__i" style="background:rgba(0,212,180,.15)">⚡</div><h4>Tes niveaux</h4><p>Débutant, Initié, Régulier, Athlète, Guerrier, Champion, Légende. Chaque séance te fait monter.</p></div>
         <div class="mo rev d3"><div class="mo__i" style="background:rgba(170,255,42,.15)">🏆</div><h4>Tes records</h4><p>Détectés en direct, célébrés à l'écran, et rangés dans ta frise pour que tu voies le chemin.</p></div>
         <div class="mo rev d4"><div class="mo__i" style="background:rgba(244,114,182,.15)">📓</div><h4>Ton journal</h4><p>Humeur, énergie, sommeil : dix secondes par jour. Ça explique beaucoup de séances.</p></div>
@@ -601,7 +624,7 @@ p{margin:0; text-wrap:pretty}
         </div>
         <ul class="priv__l">
           <li><span class="tick">✓</span><span><b>Tes photos ne partent que si tu l'autorises.</b> Un seul interrupteur dans ton profil, et tu peux changer d'avis quand tu veux.</span></li>
-          <li><span class="tick">✓</span><span><b>Tes données sont stockées en France.</b> À Paris. Seule l'analyse de tes vidéos passe par Google — c'est écrit dans la politique de confidentialité, on ne te le cache pas.</span></li>
+          <li><span class="tick">✓</span><span><b>Tes données sont stockées en France.</b> À Paris. Seule l'analyse de tes vidéos passe par Google — c'est écrit, on ne te le cache pas.</span></li>
           <li><span class="tick">✓</span><span><b>Tes vidéos ne traînent pas.</b> Elles sont supprimées dix jours après le retour de ton coach.</span></li>
           <li><span class="tick">✓</span><span><b>Tu pars quand tu veux.</b> Suppression de ton compte et de tout ce qu'il contient, en un geste, depuis l'app.</span></li>
         </ul>
@@ -615,7 +638,7 @@ p{margin:0; text-wrap:pretty}
     <div class="wrap fin__in">
       <p class="eyebrow rev">On commence ?</p>
       <h2 class="rev d1">Demande ton code<br>à ton coach.</h2>
-      <p class="lede rev d2">Il te donne un code, tu le saisis à l'inscription, et tu es relié à lui. L'inscription prend une minute : sept questions, une par écran.</p>
+      <p class="lede rev d2">Il te donne un code, tu le saisis à l'inscription, et tu es relié à lui. Une minute, sept questions, une par écran.</p>
       <p class="code rev d3">ARNOLD-XXXX <span>ton code</span></p>
       <div class="fin__cta rev d3">
         <a class="btn btn--primary" href="#top">Télécharger Arnold</a>
@@ -648,6 +671,35 @@ p{margin:0; text-wrap:pretty}
   var onScroll = function(){ nav.classList.toggle('is-stuck', window.scrollY > 8); };
   onScroll();
   window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* rubriques (onglets) */
+  var ftabs = document.getElementById('ftabs');
+  var rubs  = document.getElementById('rubs');
+  if (ftabs && rubs) {
+    var btns = Array.prototype.slice.call(ftabs.querySelectorAll('.ftab'));
+    var panels = btns.map(function(b){ return document.getElementById(b.getAttribute('aria-controls')); });
+    var showTab = function(i, focus){
+      btns.forEach(function(b, j){
+        b.classList.toggle('is-on', j === i);
+        b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+        b.tabIndex = j === i ? 0 : -1;
+        panels[j].classList.toggle('is-cur', j === i);
+      });
+      if (focus) btns[i].focus();
+    };
+    btns.forEach(function(b, i){
+      b.addEventListener('click', function(){ showTab(i); });
+      b.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : (e.key === 'ArrowLeft' ? -1 : 0);
+        if (d) { e.preventDefault(); showTab((i + d + btns.length) % btns.length, true); }
+      });
+    });
+    var h = location.hash.replace('#', '');
+    var start = 0;
+    btns.forEach(function(b, i){ if (b.getAttribute('aria-controls') === h) start = i; });
+    rubs.classList.add('tabs-ready');
+    showTab(start);
+  }
 
   var items = document.querySelectorAll('.rev:not(.in)');
   if (!('IntersectionObserver' in window)) {
