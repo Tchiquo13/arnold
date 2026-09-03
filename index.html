@@ -3,20 +3,572 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arnold</title>
-<meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=./coach/">
-<link rel="canonical" href="https://tchiquo13.github.io/arnold/coach/">
+<title>Arnold — Le bras droit qui te manquait | L'app des coachs sportifs indépendants</title>
+<meta name="description" content="Arnold est l'application des coachs sportifs indépendants. Programmes, revue vidéo, nutrition, présentiel, revenus : tout au même endroit. L'IA prépare, tu gardes le dernier mot. Données hébergées à Paris.">
+<meta name="author" content="CESSIO COACHING">
+<link rel="canonical" href="https://arnoldapp.fr/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Arnold">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Arnold — Le bras droit qui te manquait">
+<meta property="og:description" content="L'app des coachs sportifs indépendants. Recopier tes programmes, calculer les charges, planifier les séances, regarder les vidéos avant toi : Arnold prend tout ça. Les programmes, eux, restent les tiens.">
+<meta property="og:url" content="https://arnoldapp.fr/">
+<meta property="og:image" content="https://arnoldapp.fr/og-coach.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
-  html{background:#070B11}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;
-       background:#070B11;color:#EEF2F8;
-       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  a{color:#00D4B4}
+:root{
+  --ink:#070B11; --surface:#0C1220; --card:#111827; --card-hi:#141F30;
+  --line:rgba(255,255,255,.07); --line-hi:rgba(255,255,255,.13);
+  --teal:#00D4B4; --teal-dim:rgba(0,212,180,.12); --teal-glow:rgba(0,212,180,.22); --teal-dk:#009E87;
+  --t1:#EEF2F8; --t2:#8E9DB8; --t3:#5F7089;
+  --ok:#4ADE80; --warn:#FBBF24; --err:#FF5252;
+  --disp:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-md:14px; --r-lg:18px; --r-xl:26px; --r-full:999px;
+  --gut:clamp(20px,5vw,40px);
+  --shadow:0 4px 24px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.04) inset;
+}
+*{box-sizing:border-box}
+html{background:var(--ink);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--t1);
+  font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--disp);line-height:1.12;margin:0;letter-spacing:-.02em}
+p{margin:0 0 1em}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{color:var(--t1);font-weight:700}
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--gut)}
+.narrow{max-width:760px}
+
+/* ── Chrome ── */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,11,17,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.top__in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.mark{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1.18rem;color:var(--t1);letter-spacing:-.03em}
+.mark:hover{text-decoration:none}
+.mark__dot{width:26px;height:26px;border-radius:9px;background:var(--teal);display:grid;place-items:center;color:var(--ink);font-size:.82rem;font-weight:800;box-shadow:0 0 22px var(--teal-glow)}
+.top nav{display:flex;gap:26px;font-size:.94rem}
+.top nav a{color:var(--t2)}
+.top nav a:hover{color:var(--t1);text-decoration:none}
+@media(max-width:720px){.top nav{display:none}}
+
+/* ── Hero ── */
+.hero{position:relative;padding:clamp(56px,9vw,104px) 0 clamp(44px,7vw,76px);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:-40% 30% auto -10%;height:560px;
+  background:radial-gradient(ellipse at 30% 40%, rgba(0,212,180,.16), transparent 62%);
+  pointer-events:none;
+}
+.hero__in{position:relative}
+.slogan{border-left:3px solid var(--teal);padding-left:16px;margin-bottom:26px}
+.slogan b{display:block;font-family:var(--disp);font-weight:800;font-size:1.24rem;color:var(--t1);letter-spacing:-.02em}
+.slogan span{display:block;margin-top:3px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
+h1{font-size:clamp(2.3rem,6.4vw,4.1rem);font-weight:800;max-width:15ch}
+.hero__sub{margin-top:24px;max-width:60ch;font-size:clamp(1rem,1.9vw,1.14rem);color:var(--t2)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;align-items:center}
+.btn{
+  display:inline-block;padding:14px 26px;border-radius:var(--r-full);
+  font-family:var(--disp);font-weight:700;font-size:1rem;
+}
+.btn:hover{text-decoration:none}
+.btn--p{background:var(--teal);color:#00120E;box-shadow:0 8px 30px -8px var(--teal-glow)}
+.btn--p:hover{background:#2BE3C7}
+.btn--s{border:1px solid var(--line-hi);color:var(--t1)}
+.btn--s:hover{border-color:var(--teal);color:var(--teal)}
+.cta__note{font-size:.88rem;color:var(--t3);flex-basis:100%;margin:0}
+
+/* ── Bande de preuve ── */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.proof ul{list-style:none;margin:0;padding:26px 0;display:grid;gap:22px;grid-template-columns:repeat(4,1fr)}
+.proof li b{display:block;font-family:var(--disp);font-weight:800;font-size:1.5rem;color:var(--teal)}
+.proof li span{font-size:.9rem;color:var(--t2)}
+@media(max-width:760px){.proof ul{grid-template-columns:repeat(2,1fr)}}
+
+/* ── Sections ── */
+section{padding:clamp(56px,8vw,96px) 0}
+.eyebrow{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:14px}
+h2{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;max-width:20ch}
+h2+p.lede{margin-top:18px;max-width:62ch;color:var(--t2);font-size:1.06rem}
+h3{font-size:1.16rem;font-weight:700}
+
+/* ── Cartes ── */
+.grid{display:grid;gap:16px;margin-top:44px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:860px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g3,.g2{grid-template-columns:1fr}}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:26px 24px;box-shadow:var(--shadow);
+}
+.card__i{
+  width:38px;height:38px;border-radius:12px;background:var(--teal-dim);
+  border:1px solid rgba(0,212,180,.24);display:grid;place-items:center;
+  font-size:1.05rem;margin-bottom:16px;
+}
+.card h3{margin-bottom:8px}
+.card p{color:var(--t2);font-size:.97rem;margin:0}
+.card ul{margin:12px 0 0;padding-left:1.1em;color:var(--t2);font-size:.94rem}
+.card ul li{margin-bottom:5px}
+
+/* ── Encadré IA ── */
+.spot{
+  background:linear-gradient(150deg, var(--card-hi), var(--card));
+  border:1px solid rgba(0,212,180,.26);border-radius:var(--r-xl);
+  padding:clamp(28px,4vw,46px);box-shadow:0 18px 50px -14px rgba(0,0,0,.7);
+}
+.steps{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(3,1fr);counter-reset:s}
+@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.steps li{
+  position:relative;background:rgba(255,255,255,.03);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:20px 20px 20px 20px;counter-increment:s;
+}
+.steps li::before{
+  content:counter(s);font-family:var(--disp);font-weight:800;font-size:.8rem;
+  display:grid;place-items:center;width:24px;height:24px;border-radius:var(--r-full);
+  background:var(--teal);color:#00120E;margin-bottom:12px;
+}
+.steps b{display:block;font-family:var(--disp);font-size:1.02rem;margin-bottom:4px}
+.steps span{color:var(--t2);font-size:.93rem}
+.steps li:last-child{border-color:rgba(0,212,180,.35);background:var(--teal-dim)}
+
+/* ── Listes de fonctionnalités ── */
+.feat{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.feat li{position:relative;padding-left:28px;color:var(--t2);font-size:.98rem}
+.feat li::before{
+  content:"";position:absolute;left:6px;top:.62em;width:7px;height:7px;
+  border-radius:var(--r-full);background:var(--teal);
+}
+.feat li b{color:var(--t1)}
+
+/* ── Ce qu'Arnold ne fait pas ── */
+.nots{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:680px){.nots{grid-template-columns:1fr}}
+.nots li{
+  display:flex;gap:13px;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:17px 19px;
+}
+.nots i{font-style:normal;color:var(--err);font-weight:700;line-height:1.5;flex:none}
+.nots b{display:block;font-family:var(--disp);font-size:1rem}
+.nots span{color:var(--t2);font-size:.92rem}
+
+/* ── Tarif ── */
+.price{
+  background:var(--card);border:1px solid var(--line-hi);border-radius:var(--r-xl);
+  padding:clamp(28px,4vw,44px);text-align:center;max-width:620px;margin:44px auto 0;
+}
+.price__n{font-family:var(--disp);font-weight:800;font-size:clamp(2.6rem,7vw,3.6rem);color:var(--t1);line-height:1}
+.price__n small{font-size:1.05rem;color:var(--t2);font-weight:500}
+.price__l{color:var(--teal);font-weight:700;margin-top:10px}
+.price ul{list-style:none;margin:26px 0 0;padding:24px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;text-align:left;color:var(--t2);font-size:.97rem}
+.price ul li::before{content:"— ";color:var(--teal)}
+
+/* ── Confiance ── */
+.trust{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);margin-top:40px}
+@media(max-width:760px){.trust{grid-template-columns:1fr}}
+.trust div{border-left:2px solid var(--teal);padding-left:18px}
+.trust b{display:block;font-family:var(--disp);font-size:1.02rem;margin-bottom:5px}
+.trust span{color:var(--t2);font-size:.94rem}
+
+/* ── Chute ── */
+.end{text-align:center;background:var(--surface);border-top:1px solid var(--line)}
+.end h2{margin:0 auto;max-width:16ch}
+.end .cta{justify-content:center}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--line);padding:44px 0;font-size:.9rem;color:var(--t3)}
+.foot{display:flex;flex-wrap:wrap;gap:20px 34px;justify-content:space-between;align-items:flex-start}
+footer a{color:var(--t2)}
+footer p{margin:0 0 .5em}
+
+/* ── Révélation (progressive : rien de caché sans JS) ── */
+.js .rv{opacity:0;transform:translateY(16px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}}
 </style>
-<script>location.replace('./coach/');</script>
 </head>
 <body>
-<p>Redirection… <a href="./coach/">Ouvrir la page</a></p>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="mark" href="/"><span class="mark__dot">A</span>Arnold</a>
+    <nav>
+      <a href="#produit">Le produit</a>
+      <a href="#eleve">Côté élève</a>
+      <a href="#limites">Ce qu'il ne fait pas</a>
+      <a href="#tarif">Tarif</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap hero__in">
+    <div class="slogan">
+      <b>Le bras droit qui te manquait.</b>
+      <span>L'app des coachs sportifs indépendants</span>
+    </div>
+    <h1>Récupère tes soirées. Garde tes élèves.</h1>
+    <p class="hero__sub">
+      Recopier tes programmes, calculer les charges, planifier les séances,
+      regarder les vidéos avant toi, préparer ton point du dimanche&nbsp;:
+      Arnold prend tout ça. <strong>Les programmes, eux, restent les tiens.</strong>
+    </p>
+    <div class="cta">
+      <a class="btn btn--p" href="mailto:support@arnoldapp.fr?subject=Arnold%20-%20je%20veux%20essayer">Essayer Arnold</a>
+      <a class="btn btn--s" href="/coach/">Voir ce que ça change au quotidien</a>
+      <p class="cta__note">Coaching en distanciel, en présentiel, ou les deux. Tes élèves ne paient rien.</p>
+    </div>
+  </div>
+</section>
+
+<div class="proof">
+  <div class="wrap">
+    <ul>
+      <li><b>205</b><span>exercices livrés avec l'app</span></li>
+      <li><b>10 s</b><span>de vidéo suffisent pour corriger un mouvement</span></li>
+      <li><b>3</b><span>élèves inclus dès le premier mois</span></li>
+      <li><b>Paris</b><span>où vivent les données de tes élèves</span></li>
+    </ul>
+  </div>
+</div>
+
+<section id="probleme">
+  <div class="wrap narrow">
+    <p class="eyebrow rv">Le vrai problème</p>
+    <h2 class="rv">Ton métier, c'est le coaching. Pas la saisie.</h2>
+    <p class="lede rv">
+      Un coach indépendant qui suit dix élèves passe ses dimanches soir à recopier
+      des tableaux, à retrouver une vidéo perdue dans une conversation, à refaire
+      les mêmes calculs de charges, et à écrire dix fois le même message.
+      Rien de tout ça n'est du coaching. Et c'est pourtant ce qui remplit tes soirées.
+    </p>
+    <p class="lede rv">
+      Arnold n'invente pas ta méthode et ne prend pas ta place auprès de tes élèves.
+      Il prend la mécanique&nbsp;: la saisie, le calcul, le rappel, le classement,
+      le premier regard sur une vidéo. Ce qui reste, c'est ton métier.
+    </p>
+  </div>
+</section>
+
+<section id="produit">
+  <div class="wrap">
+    <p class="eyebrow rv">Ce qu'Arnold fait pour toi</p>
+    <h2 class="rv">Six chantiers, une seule application.</h2>
+    <p class="lede rv">Tout ce qui suit existe et tourne aujourd'hui sur iPhone et sur Android.</p>
+
+    <div class="grid g3">
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">🧱</div>
+        <h3>Construire les programmes</h3>
+        <p>Un vrai constructeur de séances, pensé pour le pouce.</p>
+        <ul>
+          <li>Séries, répétitions, charges, tempo, intensité</li>
+          <li>Circuits et supersets, volume calculé tout seul</li>
+          <li>Modèles de séance à reposer sur n'importe quel élève</li>
+          <li>Planification sur dix dates d'un coup</li>
+          <li>205 exercices fournis, plus les tiens avec ta propre vidéo</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">🎥</div>
+        <h3>Revoir les techniques</h3>
+        <p>Tes vidéos d'élèves arrivent dans une file, comme une boîte de réception.</p>
+        <ul>
+          <li>L'élève filme dix secondes de son mouvement</li>
+          <li>L'IA regarde en premier et sort ses observations</li>
+          <li><b>Tu valides, corriges ou jettes avant que l'élève voie quoi que ce soit</b></li>
+          <li>Tu réponds à la voix, pas au clavier</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">📊</div>
+        <h3>Suivre sans fouiller</h3>
+        <p>Une fiche par élève, tout au même endroit.</p>
+        <ul>
+          <li>Bilan hebdomadaire&nbsp;: les non-lus et les problèmes en tête</li>
+          <li>Humeur, énergie, sommeil, poids, pas</li>
+          <li>Performances par exercice, records, photos comparées</li>
+          <li>Le calendrier de tous tes élèves sur un écran</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">🥗</div>
+        <h3>Nourrir</h3>
+        <p>Le plan alimentaire écrit par l'IA, réglé par toi.</p>
+        <ul>
+          <li>Généré depuis les objectifs, le poids, les préférences, les allergies</li>
+          <li>Ta signature nutritionnelle, et des leviers macro par élève</li>
+          <li>Adhérence visible&nbsp;: mangé contre prévu, repas modifiés compris</li>
+          <li>Recettes, liste de courses et scanner de code-barres côté élève</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">🏋️</div>
+        <h3>Tenir le présentiel</h3>
+        <p>La salle n'est pas un cas particulier du distanciel.</p>
+        <ul>
+          <li>Carnet de séance&nbsp;: ta prépa reste privée, l'élève voit le rendez-vous</li>
+          <li>Packs de séances prépayées, alerte à deux séances restantes</li>
+          <li>Séance menée en direct depuis ton téléphone</li>
+          <li>« Refaire » une séance passée en deux gestes</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <div class="card__i" aria-hidden="true">💶</div>
+        <h3>Voir ton activité</h3>
+        <p>Ce que tu gagnes, sans tableur.</p>
+        <ul>
+          <li>Trois chiffres clés et une courbe sur douze mois</li>
+          <li>Le détail par élève et par mois</li>
+          <li>La vérité cash&nbsp;: un paiement compte le mois où il rentre</li>
+          <li>Suivi des paiements, élève par élève</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="ia">
+  <div class="wrap">
+    <div class="spot rv">
+      <p class="eyebrow">L'intelligence artificielle, encadrée</p>
+      <h2>Tu gardes le dernier mot.</h2>
+      <p class="lede">
+        C'est la première question que pose un coach, et elle est légitime&nbsp;:
+        est-ce que cette chose va me remplacer&nbsp;? Non. Chez Arnold, l'IA
+        travaille <strong>avant toi</strong>, jamais <strong>à ta place</strong>.
+        Rien ne part chez ton élève sans passer par toi.
+      </p>
+      <ol class="steps">
+        <li><b>Ton élève filme</b><span>Dix secondes de son mouvement, depuis l'app.</span></li>
+        <li><b>L'IA dégrossit</b><span>Elle relève les angles, les appuis, les écarts, et propose une note.</span></li>
+        <li><b>Tu tranches</b><span>Tu valides, tu corriges, ou tu jettes. C'est ta parole que l'élève reçoit.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="eleve">
+  <div class="wrap">
+    <p class="eyebrow rv">L'autre bout du fil</p>
+    <h2 class="rv">Ce que ton élève reçoit.</h2>
+    <p class="lede rv">
+      Une app gratuite, en français, qu'il n'a pas à configurer. Il entre ton code,
+      et il a sa séance. Rien d'autre à comprendre.
+    </p>
+
+    <div class="grid g2">
+      <article class="card rv">
+        <h3>À la salle</h3>
+        <ul class="feat">
+          <li><b>Sa séance du jour</b>, prête, rien à chercher</li>
+          <li>Séries, répétitions, charges, minuteur de repos, circuits</li>
+          <li><b>La démonstration en vidéo</b> avant chaque exercice</li>
+          <li>Ses records signalés au moment où il les bat</li>
+          <li>Filmer sa technique en dix secondes et attendre ton retour</li>
+        </ul>
+      </article>
+
+      <article class="card rv">
+        <h3>À la maison</h3>
+        <ul class="feat">
+          <li><b>Son plan alimentaire</b> du jour et ses trois anneaux de macros</li>
+          <li>« J'ai mangé autrement »&nbsp;: il ajuste, <b>tu vois l'écart</b></li>
+          <li>Ses recettes, et la <b>liste de courses de la semaine</b> par rayon</li>
+          <li>Son journal en dix secondes&nbsp;: humeur, énergie, sommeil, poids</li>
+          <li>Ses photos avant/après, sa courbe, son bilan de la semaine</li>
+          <li>Vos messages, avec des notes vocales</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="limites">
+  <div class="wrap">
+    <p class="eyebrow rv">L'honnêteté d'abord</p>
+    <h2 class="rv">Ce qu'Arnold ne fait pas.</h2>
+    <p class="lede rv">
+      Autant que tu le saches avant de t'inscrire plutôt qu'après.
+    </p>
+    <ul class="nots">
+      <li class="rv"><i>✕</i><span><b>Pas de paiement en ligne</b>Tes élèves te paient comme ils te paient déjà. Arnold en tient la trace, il ne s'interpose pas.</span></li>
+      <li class="rv"><i>✕</i><span><b>Pas de coaching automatique</b>Aucun élève ne reçoit un programme sans qu'un coach l'ait écrit. Il n'y a pas de bouton pour ça.</span></li>
+      <li class="rv"><i>✕</i><span><b>Pas de vidéos gardées à vie</b>Une vidéo de technique disparaît dix jours après ton retour, et au plus tard au bout de quarante-cinq jours.</span></li>
+      <li class="rv"><i>✕</i><span><b>Pas de classement entre élèves</b>En dessous d'une douzaine d'élèves, la comparaison décourage plus qu'elle ne motive. On l'a retirée.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="tarif">
+  <div class="wrap">
+    <p class="eyebrow rv">Le tarif</p>
+    <h2 class="rv">Un prix, pas une grille à dix colonnes.</h2>
+    <div class="price rv">
+      <div class="price__n">29,90&nbsp;€<small>&nbsp;/ mois</small></div>
+      <div class="price__l">Le premier mois est offert.</div>
+      <ul>
+        <li><b>Trois élèves inclus</b>, puis 4,99&nbsp;€ par mois et par élève supplémentaire.</li>
+        <li><b>Tes élèves ne paient rien</b>, jamais. L'app est gratuite pour eux.</li>
+        <li>Tu arrêtes quand tu veux. <b>Rien n'est effacé</b>&nbsp;: l'app repasse en lecture seule.</li>
+        <li>Sans engagement, sans frais d'installation, sans commission sur ton chiffre d'affaires.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="confiance">
+  <div class="wrap">
+    <p class="eyebrow rv">Ce sur quoi tu peux compter</p>
+    <h2 class="rv">Une app française, faite par un coach.</h2>
+    <div class="trust">
+      <div class="rv">
+        <b>Tes données restent à Paris</b>
+        <span>Les données de tes élèves sont hébergées en France, région <span lang="en">eu-west-3</span>. Pas aux États-Unis, pas « quelque part en Europe ».</span>
+      </div>
+      <div class="rv">
+        <b>Conforme au RGPD, pour de vrai</b>
+        <span>Chaque élève exporte ses données et supprime son compte depuis l'app, en deux gestes. Sans écrire à un support.</span>
+      </div>
+      <div class="rv">
+        <b>Écrite par quelqu'un du métier</b>
+        <span>Arnold est développée par Axel Cessio, coach sportif indépendant, à partir de ses propres dimanches soir perdus.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2 class="rv">Ton prochain dimanche soir est libre.</h2>
+    <div class="cta rv">
+      <a class="btn btn--p" href="mailto:support@arnoldapp.fr?subject=Arnold%20-%20je%20veux%20essayer">Essayer Arnold</a>
+      <a class="btn btn--s" href="/coach/">Lire la présentation complète</a>
+      <p class="cta__note">Arnold est en bêta fermée auprès de coachs et de leurs élèves. Écris-nous, on t'ouvre un accès.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <p><strong>Arnold</strong> — Le bras droit qui te manquait.</p>
+      <p>L'application des coachs sportifs indépendants.</p>
+    </div>
+    <div>
+      <p><a href="/coach/">Présentation coach</a> · <a href="/eleve/">Présentation élève</a></p>
+      <p><a href="mailto:support@arnoldapp.fr">support@arnoldapp.fr</a></p>
+    </div>
+    <div>
+      <p>Édité par <strong>CESSIO COACHING</strong> — Axel Cessio</p>
+      <p>SIREN 883&nbsp;916&nbsp;827 · Données hébergées en France</p>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://arnoldapp.fr/#org",
+      "name":"CESSIO COACHING",
+      "alternateName":"Arnold",
+      "url":"https://arnoldapp.fr/",
+      "email":"support@arnoldapp.fr",
+      "slogan":"Le bras droit qui te manquait.",
+      "description":"Éditeur d'Arnold, l'application des coachs sportifs indépendants.",
+      "address":{"@type":"PostalAddress","addressCountry":"FR"},
+      "founder":{"@type":"Person","name":"Axel Cessio"}
+    },
+    {
+      "@type":"SoftwareApplication",
+      "@id":"https://arnoldapp.fr/#app",
+      "name":"Arnold",
+      "applicationCategory":"HealthApplication",
+      "applicationSubCategory":"Coaching sportif",
+      "operatingSystem":"iOS, Android",
+      "inLanguage":"fr-FR",
+      "url":"https://arnoldapp.fr/",
+      "image":"https://arnoldapp.fr/og-coach.png",
+      "publisher":{"@id":"https://arnoldapp.fr/#org"},
+      "slogan":"Le bras droit qui te manquait.",
+      "description":"Arnold est l'application des coachs sportifs indépendants : construction de programmes, revue vidéo assistée par IA validée par le coach, plans nutritionnels, gestion du présentiel et suivi des revenus. Les élèves utilisent l'app gratuitement.",
+      "audience":{"@type":"Audience","audienceType":"Coachs sportifs indépendants"},
+      "featureList":[
+        "Constructeur de programmes : séries, répétitions, charges, tempo, intensité",
+        "Circuits et supersets avec calcul de volume",
+        "Modèles de séance réutilisables et planification multi-dates",
+        "Bibliothèque de 205 exercices, plus les exercices du coach",
+        "File de revue vidéo : l'élève filme 10 secondes, le coach corrige",
+        "Analyse IA de la technique, validée par le coach avant envoi",
+        "Réponse en note vocale",
+        "Bilans hebdomadaires par élève, triés par urgence",
+        "Journal de l'élève : humeur, énergie, sommeil, poids, pas",
+        "Plan alimentaire généré par IA et réglé par le coach",
+        "Suivi d'adhérence nutritionnelle et repas modifiés",
+        "Recettes, liste de courses par rayon, scanner de code-barres",
+        "Carnet de séance présentiel et packs de séances prépayées",
+        "Séance menée en direct par le coach",
+        "Suivi des revenus sur douze mois glissants",
+        "Messagerie temps réel avec notes vocales",
+        "Photos de progression avant/après, records, courbes",
+        "Export et suppression des données par l'élève (RGPD)"
+      ],
+      "offers":{
+        "@type":"Offer",
+        "price":"29.90",
+        "priceCurrency":"EUR",
+        "description":"29,90 € par mois, 3 élèves inclus, puis 4,99 € par mois et par élève supplémentaire. Premier mois offert. Gratuit pour les élèves.",
+        "availability":"https://schema.org/PreOrder"
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<els.length;i++) els[i].classList.add('in');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.05});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
