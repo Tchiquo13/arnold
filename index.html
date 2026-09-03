@@ -8,13 +8,18 @@
 <meta name="author" content="CESSIO COACHING">
 <link rel="canonical" href="https://arnoldapp.fr/">
 
+<link rel="icon" type="image/png" sizes="64x64" href="/icon-64.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
+<meta name="theme-color" content="#070B11">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Arnold">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Arnold — Le bras droit qui te manquait">
 <meta property="og:description" content="L'app des coachs sportifs indépendants. Recopier tes programmes, calculer les charges, planifier les séances, regarder les vidéos avant toi : Arnold prend tout ça. Les programmes, eux, restent les tiens.">
 <meta property="og:url" content="https://arnoldapp.fr/">
-<meta property="og:image" content="https://arnoldapp.fr/og-coach.png">
+<meta property="og:image" content="https://arnoldapp.fr/og-accueil.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -60,7 +65,7 @@ strong{color:var(--t1);font-weight:700}
 .top__in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .mark{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1.18rem;color:var(--t1);letter-spacing:-.03em}
 .mark:hover{text-decoration:none}
-.mark__dot{width:26px;height:26px;border-radius:9px;background:var(--teal);display:grid;place-items:center;color:var(--ink);font-size:.82rem;font-weight:800;box-shadow:0 0 22px var(--teal-glow)}
+.mark img{width:32px;height:32px;border-radius:10px;display:block;border:1px solid rgba(0,212,180,.2);box-shadow:0 4px 16px -4px var(--teal-glow)}
 .top nav{display:flex;gap:26px;font-size:.94rem}
 .top nav a{color:var(--t2)}
 .top nav a:hover{color:var(--t1);text-decoration:none}
@@ -205,7 +210,7 @@ footer p{margin:0 0 .5em}
 
 <header class="top">
   <div class="wrap top__in">
-    <a class="mark" href="/"><span class="mark__dot">A</span>Arnold</a>
+    <a class="mark" href="/"><img src="/icon-64.png" width="32" height="32" alt="Icône de l'application Arnold : un A dont la barre est un haltère">Arnold</a>
     <nav>
       <a href="#produit">Le produit</a>
       <a href="#eleve">Côté élève</a>
@@ -501,6 +506,7 @@ footer p{margin:0 0 .5em}
       "name":"CESSIO COACHING",
       "alternateName":"Arnold",
       "url":"https://arnoldapp.fr/",
+      "logo":"https://arnoldapp.fr/icon.png",
       "email":"support@arnoldapp.fr",
       "slogan":"Le bras droit qui te manquait.",
       "description":"Éditeur d'Arnold, l'application des coachs sportifs indépendants.",
@@ -516,7 +522,8 @@ footer p{margin:0 0 .5em}
       "operatingSystem":"iOS, Android",
       "inLanguage":"fr-FR",
       "url":"https://arnoldapp.fr/",
-      "image":"https://arnoldapp.fr/og-coach.png",
+      "image":"https://arnoldapp.fr/og-accueil.png",
+      "screenshot":"https://arnoldapp.fr/og-accueil.png",
       "publisher":{"@id":"https://arnoldapp.fr/#org"},
       "slogan":"Le bras droit qui te manquait.",
       "description":"Arnold est l'application des coachs sportifs indépendants : construction de programmes, revue vidéo assistée par IA validée par le coach, plans nutritionnels, gestion du présentiel et suivi des revenus. Les élèves utilisent l'app gratuitement.",
