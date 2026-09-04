@@ -130,6 +130,24 @@ h3{font-size:1.16rem;font-weight:700}
 .card ul{margin:12px 0 0;padding-left:1.1em;color:var(--t2);font-size:.94rem}
 .card ul li{margin-bottom:5px}
 
+/* ── Bande d'écrans ── */
+.shots{margin-top:44px;display:grid;gap:22px;grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){
+  .shots{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+         padding-bottom:14px;margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);
+         padding-left:var(--gut);padding-right:var(--gut)}
+  .shot{flex:0 0 74%;scroll-snap-align:center}
+}
+.shot figure{margin:0}
+.shot .fr{
+  border-radius:26px;overflow:hidden;background:var(--ink);
+  border:1px solid var(--line-hi);
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.85), 0 0 0 1px rgba(0,212,180,.07) inset;
+}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{margin-top:14px;font-size:.93rem;color:var(--t2);line-height:1.45}
+.shot figcaption b{display:block;font-family:var(--disp);font-weight:700;font-size:1rem;color:var(--t1);margin-bottom:3px}
+
 /* ── Encadré IA ── */
 .spot{
   background:linear-gradient(150deg, var(--card-hi), var(--card));
@@ -352,6 +370,28 @@ footer p{margin:0 0 .5em}
         </ul>
       </article>
 
+    </div>
+
+    <div class="shots">
+      <div class="shot rv"><figure>
+        <div class="fr"><img src="/app-modeles.png" width="430" height="932" alt="Écran Bibliothèque d'Arnold : les modèles de séance du coach, avec quatre exercices chiffrés en séries, répétitions et charges."></div>
+        <figcaption><b>Tes modèles</b>Écrits une fois, reposés sur qui tu veux, à la date que tu veux.</figcaption>
+      </figure></div>
+
+      <div class="shot rv"><figure>
+        <div class="fr"><img src="/app-revue.png" width="430" height="932" alt="Écran de revue vidéo d'Arnold : la vidéo d'un élève, la note de l'analyse, les points relevés, et les boutons Valider, Refilmer, Vocal, Texte."></div>
+        <figcaption><b>Ta file de vidéos</b>L'IA a dégrossi, relevé ses points, mis une note. Tu tranches.</figcaption>
+      </figure></div>
+
+      <div class="shot rv"><figure>
+        <div class="fr"><img src="/app-seance.png" width="430" height="932" alt="Écran de séance guidée d'Arnold : chronomètre de repos, exercice en cours, séries validées, charge et répétitions à régler."></div>
+        <figcaption><b>Sa séance, guidée</b>Charges, répétitions, minuteur de repos. Il n'a rien à chercher.</figcaption>
+      </figure></div>
+
+      <div class="shot rv"><figure>
+        <div class="fr"><img src="/app-nutrition.png" width="430" height="932" alt="Écran Nutrition d'Arnold côté élève : liste de courses prête, anneaux de calories et de macros, repas du jour."></div>
+        <figcaption><b>Le plan du jour</b>Calories et macros, les repas, et la liste de courses de la semaine.</figcaption>
+      </figure></div>
     </div>
   </div>
 </section>
